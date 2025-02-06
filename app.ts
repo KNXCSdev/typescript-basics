@@ -1,20 +1,23 @@
-//Custom types to basically store multiple types in one variable to not repeat number | string
-type Combinable = number | string;
-
-function combine(n1: Combinable, n2: Combinable, resultType: "as-number" | "as-text") {
-  let result;
-  if ((typeof n1 === "number" && typeof n2 === "number") || resultType === "as-number") {
-    result = +n1 + +n2;
-  } else {
-    result = n1.toString() + n2.toString();
-  }
-  return result;
-  // if (resultType === "as-number") {
-  //   return +result;
-  // } else {
-  //   return result.toString();
-  // }
+function add(n1: number, n2: number) {
+  return n1 + n2;
 }
 
-const combinedAges = combine(30, 26, "as-number");
-console.log(combinedAges);
+//void says that the function doesn`t return a value
+function printResult(num: number): void {
+  console.log("Result: " + num);
+}
+
+function addAndHandle(n1: number, n2: number, cb: (num: number) => void) {
+  const result = n1 + n2;
+  cb(result);
+}
+
+let combineValues: (a: number, b: number) => number;
+
+combineValues = add;
+
+console.log(combineValues(5, 5));
+
+addAndHandle(10, 20, (result) => {
+  console.log(result);
+});
