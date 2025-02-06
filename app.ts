@@ -1,23 +1,20 @@
-enum Role {
-  ADMIN,
-  READ_ONLY,
-  AUTHOR,
+//Custom types to basically store multiple types in one variable to not repeat number | string
+type Combinable = number | string;
+
+function combine(n1: Combinable, n2: Combinable, resultType: "as-number" | "as-text") {
+  let result;
+  if ((typeof n1 === "number" && typeof n2 === "number") || resultType === "as-number") {
+    result = +n1 + +n2;
+  } else {
+    result = n1.toString() + n2.toString();
+  }
+  return result;
+  // if (resultType === "as-number") {
+  //   return +result;
+  // } else {
+  //   return result.toString();
+  // }
 }
 
-const person: {
-  name: string;
-  age: number;
-  hobbies: string[];
-  role: [number, string];
-  use: Role.ADMIN;
-} = {
-  name: "Maximilian",
-  age: 30,
-  hobbies: ["Sports", "Cooking"],
-  role: [2, "author"],
-};
-
-let favoriteActivities: any[];
-favoriteActivities = ["Sports"];
-
-console.log(person.name);
+const combinedAges = combine(30, 26, "as-number");
+console.log(combinedAges);
